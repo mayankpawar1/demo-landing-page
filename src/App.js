@@ -1,23 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Banner from './components/banner';
+import Header from './components/header/header';
+import HeaderTop from './components/header/headerTop';
+import AccordionItem from './components/accordion';
+import Breadcrumb from './components/BreadCrumb';
+import MegaMenu from './components/header/MegaMenu';
+import Testimonial from './components/testimonial';
+import Services from './components/services';
+import AwardHighlightSection from './components/award';
+import CaseStudyHighlight from './components/casestudy';
+import Footer from './components/footer';
+import BookADemoForm from './components/bookform';
 
 function App() {
+  
+  const [showMenu, setShowMenu] = useState(false);
+
+  const toggleMegaMenu = () => {
+    setShowMenu((prev) => !prev);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="md:flex-row min-h-screen">
+      <HeaderTop/>
+      <Header toggleMegaMenu={toggleMegaMenu} />
+      {showMenu ? <MegaMenu/> : "" }
+      <main id="site-main" className="overflow-y-auto">
+        <Breadcrumb/>
+        <Banner/>
+        <Testimonial/>
+        <Services/>
+        <AccordionItem/>
+        <AwardHighlightSection/>
+        <CaseStudyHighlight/>
+        <BookADemoForm/>
+      </main>
+      <Footer/>
     </div>
   );
 }
